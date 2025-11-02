@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+:root {
+    --bg-primary: #fcfce2;
+    --primary:#38e07b;
+}
+
+/* Apply to whole app */
+@layer base {
+    body {
+        @apply bg-(--bg-primary); /* use CSS variable with Tailwind */
+    }
+}
