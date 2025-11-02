@@ -24,7 +24,7 @@ const Home = () => {
       const formData = new FormData()
       formData.append('file',image)
       const token = localStorage.getItem("token")
-      const response = await axios.post("http://localhost:3000/api/predict",formData,{
+      const response = await axios.post("https://backend-of-eco-vison.onrender.com/api/predict",formData,{
         headers:{"Content-Type":"multipart/form-data","Authorization":`Bearer ${token}`}
       })
       setPrediction(response.data.data.predicted_class)

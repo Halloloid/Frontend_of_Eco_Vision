@@ -13,7 +13,7 @@ const LeaderBoard = () => {
   useEffect(() => {
     const fetchTopUsers = async() =>{
       try {
-        const res = await axios.get("http://localhost:3000/api/leaderBoard")
+        const res = await axios.get("https://backend-of-eco-vison.onrender.com/api/leaderBoard")
         setTopUsers(res.data)
       } catch (error) {
         console.log(error)
