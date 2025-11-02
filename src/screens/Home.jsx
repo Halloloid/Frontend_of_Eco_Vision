@@ -8,6 +8,7 @@ const Home = () => {
   const [prediction,setPrediction] = useState("")
   const [confidence,setConfidence] = useState("")
   const [pct,setpct] = useState(0)
+  const [loading,setLoading] = useState(false);
   const navigate = useNavigate()
   const Login = () =>{
     navigate('/Log-in')
@@ -19,7 +20,8 @@ const Home = () => {
     navigate('/Leader_Board')
   }
   const handelSubmit = async(e) =>{
-    e.preventDefault() 
+    e.preventDefault()
+    setLoading(true); 
     try {
       const formData = new FormData()
       formData.append('file',image)
@@ -32,6 +34,8 @@ const Home = () => {
       setpct((response.data.data.confidence * 100).toFixed(2))
     } catch (error) {
       console.error("Error uploading file:", error)
+    } finally{
+      setLoading(false);
     }
   }
   return (
@@ -82,9 +86,6 @@ const Home = () => {
               <div className='flex justify-center'>
                 <p className='text-gray-600 mt-5'>Your classification results will appear here once you upload an image.</p>
               </div>
-              {/* <div>
-                <input title='upload' placeholder='upload' className='w-full flex justify-center mx-110 mt-3' type='file' accept='image/*' onChange={(e) => {setImage(e.target.files[0])}}/>
-              </div> */}
               <div className="flex flex-col items-center mt-4">
   <label
     htmlFor="file-upload"
@@ -102,7 +103,7 @@ const Home = () => {
 </div>
 
               <div className='flex justify-center'>
-               <input type='button' className='bg-green-400 px-4 py-2 rounded m-2 font-medium hover:bg-green-300 mt-1' onClick={handelSubmit} value='Submit' disabled={image == null} />
+               <input type='button' className='bg-green-400 px-4 py-2 rounded m-2 font-medium hover:bg-green-300 mt-1' onClick={handelSubmit} value={loading ? "Submiting.." : "Submit"} disabled={image == null} />
               </div>
             </div>
           </div>
